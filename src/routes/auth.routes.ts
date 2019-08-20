@@ -52,6 +52,13 @@ export class AuthRoute extends BaseRoute {
               check('password').exists() ],
                 (req: Request, res: Response, next: Function) => {
             
+            const errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                res.status(422).json({ errors: errors.array() });
+                return;
+            }            
+
             const result = new AuthController().login(req, res, next);
             this.responseNext(result, res);
         });
@@ -70,6 +77,7 @@ export class AuthRoute extends BaseRoute {
                 res.status(422).json({ errors: errors.array() });
                 return;
             }
+            
             const result = new AuthController().register(req, res, next);
             this.responseNext(result, res);
         });
