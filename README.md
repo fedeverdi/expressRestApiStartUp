@@ -6,6 +6,7 @@ Il progetto include le seguenti funzionalità:
 * Connessione di esempio a database MySql
 * Documentazione Swagger automatica con "swagger-ui-express" e "swagger-jsdoc"
 * ORM preinstallato ("typeorm")
+* Validazione rotte API con 'express-validator'
 
 ### Installazione
 
