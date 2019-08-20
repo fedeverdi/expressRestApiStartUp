@@ -21,6 +21,7 @@
    },
    "scripts": {
       "start": "ts-node src/index.ts",
-      "watch": "nodemon src/index.ts"
+      "watch": "nodemon src/index.ts",
+      "typeorm": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm"
    }
 }

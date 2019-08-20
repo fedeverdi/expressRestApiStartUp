@@ -1,5 +1,4 @@
 import * as swaggerUi from 'swagger-ui-express';
-import * as swaggerDocument from '../routes/swagger.json';
 
 const swaggerJsdoc = require('swagger-jsdoc');
 
