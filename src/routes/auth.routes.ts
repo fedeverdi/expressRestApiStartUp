@@ -1,6 +1,7 @@
 import { AuthController } from "../controller/AuthController";
 import { Request, Response } from "express";
 import { BaseRoute } from "./base.routes";
+import { check, validationResult } from 'express-validator';
 
 export class AuthRoute extends BaseRoute {
 
@@ -51,7 +52,20 @@ export class AuthRoute extends BaseRoute {
             this.responseNext(result, res);
         });
 
-        app.post('/register', (req: Request, res: Response, next: Function) => {
+        app.post('/register',
+            [ check('firstName').exists(),
+              check('lastName').exists(),
+              check('age').exists(),
+              check('username').exists(),
+              check('password').exists() ],
+                (req: Request, res: Response, next: Function) => {
+            
+            const errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                res.status(422).json({ errors: errors.array() });
+                return;
+            }
             const result = new AuthController().register(req, res, next);
             this.responseNext(result, res);
         });

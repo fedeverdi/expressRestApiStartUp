@@ -13,6 +13,7 @@
       "ejs": "^2.6.2",
       "express": "^4.15.4",
       "express-jwt": "^5.3.1",
+      "express-validator": "^6.1.1",
       "mysql": "^2.14.1",
       "reflect-metadata": "^0.1.10",
       "swagger-jsdoc": "^3.3.0",
