@@ -47,7 +47,11 @@ export class AuthRoute extends BaseRoute {
          *             schema:
          *               $ref: '#/components/responses/Unauthorized'
          */
-        app.post('/login', (req: Request, res: Response, next: Function) => {
+        app.post('/login', 
+            [ check('username').exists(),
+              check('password').exists() ],
+                (req: Request, res: Response, next: Function) => {
+            
             const result = new AuthController().login(req, res, next);
             this.responseNext(result, res);
         });
