@@ -1,0 +1,26 @@
+{
+   "name": "baseApiMySql",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "ts-node": "3.3.0",
+      "@types/node": "^8.0.29",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "bcrypt": "^3.0.6",
+      "body-parser": "^1.18.1",
+      "ejs": "^2.6.2",
+      "express": "^4.15.4",
+      "express-jwt": "^5.3.1",
+      "mysql": "^2.14.1",
+      "reflect-metadata": "^0.1.10",
+      "swagger-jsdoc": "^3.3.0",
+      "swagger-ui-express": "^4.0.7",
+      "typeorm": "0.2.18"
+   },
+   "scripts": {
+      "start": "ts-node src/index.ts",
+      "watch": "nodemon src/index.ts"
+   }
+}
