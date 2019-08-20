@@ -31,7 +31,13 @@ Il progetto include le seguenti funzionalità:
 4. Creare il proprio file di configurazione .env copiando o rinominando l'esempio nella repo
 5. Creare il file di configurazione per typeOrm ormconfig.json partendo dal file di esempio della repo
 
-6. Lanciare il server
+6. Laciare le migration per creare la tabella utenti e l'utente admin di prova
+
+```
+  # npm run typeorm migration:run    
+```
+
+7. Lanciare il server
 
 ```
   # npm run start
