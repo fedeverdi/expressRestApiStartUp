@@ -1,4 +1,4 @@
-# Node Express Startup Rest API
+# Node Express Startup Rest API (Typescript)
 
 Il progetto include le seguenti funzionalità:
 
