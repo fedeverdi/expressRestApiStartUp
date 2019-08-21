@@ -50,3 +50,11 @@ Il progetto include le seguenti funzionalità:
 ```
   # npm run watch
 ```
+
+
+## Documentazioni e librerie utilizzate
+
+* TypeOrm - [Vai alla documentazione](https://typeorm.io/#/)
+* Express Validator - [Vai alla documentazione](https://express-validator.github.io/docs/index.html)
+* Swagger UI Express - [Vai alla Repo](https://github.com/scottie1984/swagger-ui-express)
+* Express JWT - [Vai alla Repo](https://github.com/auth0/express-jwt)
