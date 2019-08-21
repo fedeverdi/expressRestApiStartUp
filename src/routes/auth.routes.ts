@@ -28,8 +28,8 @@ export class AuthRoute extends BaseRoute {
          *           schema:
          *             $ref: '#/definitions/User'
          *           example:
-         *              username: fedeverdi
-         *              password: A2l0e1x5
+         *              username: admin
+         *              password: admin
          *     responses:
          *       200:
          *         description: Success
