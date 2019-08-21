@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { validationResult } from 'express-validator';
 
 export class BaseRoute {
 
@@ -8,7 +9,11 @@ export class BaseRoute {
         });
     }
    
-
+    /**
+     * Standardizza la response sulle rotte
+     * @param result 
+     * @param res 
+     */
     public responseNext(result, res) {
         if (result instanceof Promise) {
             result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
@@ -18,6 +23,22 @@ export class BaseRoute {
         }
     }
 
+
+    /**
+     * Risposta standard per il validatore express-validator usato nelle rotte
+     */
+    public validate = validations => {
+        return async (req, res, next) => {
+          await Promise.all(validations.map(validation => validation.run(req)));
+      
+          const errors = validationResult(req);
+          if (errors.isEmpty()) {
+            return next();
+          }
+      
+          res.status(422).json({ errors: errors.array() });
+        };
+      };
 
     /**
      * @swagger
