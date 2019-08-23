@@ -48,7 +48,27 @@ export class MailManager {
     private async prodEmailSender(user) {
 
         try {
-            console.log('Messaggio correttamente');
+            // create reusable transporter object using the default SMTP transport
+            let transporter = nodemailer.createTransport({
+                host: process.env.SMTP_SERVER,
+                port: process.env.SMTP_PORT,
+                secure: process.env.SMTP_SECURE,
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASSWORD
+                }
+            });
+        
+            // Invio la mail
+            let info = await transporter.sendMail({
+                from: '"StartUp Express API App" <info@nodeStartUpApiRest.com>',
+                to: user.email,
+                subject: 'Utente creato', // Subject line
+                text: 'Conferma creazione utente', // plain text body
+                html: '<b>Conferma creazione utente</b>' // html body
+            });
+        
+            console.log('Messaggio correttamente inviato: %s', info.messageId);
         } catch (error) {
             console.log(error);
         }
