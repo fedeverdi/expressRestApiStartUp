@@ -13,6 +13,7 @@ export class UserFill1566339964577 implements MigrationInterface {
             firstName: 'admin',
             lastName: 'admin',
             age: 38,
+            email: 'admin@admin.it',
             username: 'admin',
             password: '$2b$10$WQsixT3VOiyZcAjACtKLCu9pMy4dtU812H2ZFlXlQSalSLdpo9gOC'
         })

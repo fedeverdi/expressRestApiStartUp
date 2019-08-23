@@ -34,6 +34,13 @@ export class UserCreate1566339176512 implements MigrationInterface {
                     length: '11'
                 },
                 {
+                    name: "email",
+                    type: "varchar",
+                    isNullable: true,
+                    comment: 'Email utente',
+                    length: '255'
+                },
+                {
                     name: "username",
                     type: "varchar",
                     isNullable: false,
