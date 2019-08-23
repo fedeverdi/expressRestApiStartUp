@@ -2,18 +2,20 @@ import * as nodemailer from 'nodemailer';
 
 export class MailManager {
 
+    private _user;
+    private _transporter;
+
     /**
      * Metodo privato di invio mail di test con nodemailer
-     * @param user (utente)
      */
-    private async testEmailSender(user) {
+    private async testEmailSender() {
 
         try {
            // Creo un test account con "ethereal"
             let testAccount = await nodemailer.createTestAccount();
 
             // create reusable transporter object using the default SMTP transport
-            let transporter = nodemailer.createTransport({
+            this._transporter = nodemailer.createTransport({
                 host: 'smtp.ethereal.email',
                 port: 587,
                 secure: false,
@@ -24,14 +26,8 @@ export class MailManager {
             });
         
             // Invio la mail
-            let info = await transporter.sendMail({
-                from: '"StartUp Express API App" <info@nodeStartUpApiRest.com>',
-                to: user.email,
-                subject: 'Utente creato', // Subject line
-                text: 'Conferma creazione utente', // plain text body
-                html: '<b>Conferma creazione utente</b>' // html body
-            });
-        
+            let info = await this.sendBody();
+
             console.log('Messaggio correttamente inviato: %s', info.messageId);
 
             console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));  
@@ -43,13 +39,12 @@ export class MailManager {
 
     /**
      * Metodo privato di invio mail di prod con nodemailer
-     * @param user (utente)
      */
-    private async prodEmailSender(user) {
+    private async prodEmailSender() {
 
         try {
             // create reusable transporter object using the default SMTP transport
-            let transporter = nodemailer.createTransport({
+            this._transporter = nodemailer.createTransport({
                 host: process.env.SMTP_SERVER,
                 port: Number(process.env.SMTP_PORT),
                 secure: (process.env.SMTP_SECURE === "true"),
@@ -60,13 +55,7 @@ export class MailManager {
             });
         
             // Invio la mail
-            let info = await transporter.sendMail({
-                from: '"StartUp Express API App" <info@nodeStartUpApiRest.com>',
-                to: user.email,
-                subject: 'Utente creato', // Subject line
-                text: 'Conferma creazione utente', // plain text body
-                html: '<b>Conferma creazione utente</b>' // html body
-            });
+            let info = await this.sendBody();
         
             console.log('Messaggio correttamente inviato: %s', info.messageId);
         } catch (error) {
@@ -76,15 +65,31 @@ export class MailManager {
     }
 
     /**
+     * Invia il body della mail
+     */
+    private sendBody() {
+        let info = this._transporter.sendMail({
+            from: '"StartUp Express API App" <info@nodeStartUpApiRest.com>',
+            to: this._user.email,
+            subject: 'Utente creato', // Subject line
+            text: 'Conferma creazione utente', // plain text body
+            html: '<b>Conferma creazione utente</b>' // html body
+        });
+
+        return info;
+    }
+
+    /**
      * Metodo pubblico di invio Email di test
-     * @param user (utente)
      */
     public sendEmail(user) {
 
+        this._user = user;
+
         if(process.env.DEBUG === "true") {
-            this.testEmailSender(user);
+            this.testEmailSender();
         } else {
-            this.prodEmailSender(user);
+            this.prodEmailSender();
         }
     }
 
