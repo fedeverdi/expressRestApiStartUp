@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { User } from "../entity/User";
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
+import { MailManager } from '../manager/MailManager';
 
 export class AuthController {
 
@@ -62,6 +63,16 @@ export class AuthController {
                 // Altrimenti lo creo e lo ritorno nella response
                 user = request.body;
                 user.password = bcrypt.hashSync(user.password, 10);
+
+                // Se settato a true nella env invio la mail
+                if(process.env.SEND_USERCREATION_EMAIL === "true") {
+                    // Recupero l'istanza del mail manager per l'invio della mail di conferma
+                    const mail = new MailManager();
+
+                    // Invio la mail di conferma
+                    mail.sendEmail(user);
+                }
+               
                 return this.userRepository.save(user);
             }
         } catch (error) {
