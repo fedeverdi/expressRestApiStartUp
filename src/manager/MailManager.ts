@@ -68,15 +68,13 @@ export class MailManager {
      * Invia il body della mail
      */
     private sendBody() {
-        let info = this._transporter.sendMail({
+        return this._transporter.sendMail({
             from: '"StartUp Express API App" <info@nodeStartUpApiRest.com>',
             to: this._user.email,
             subject: 'Utente creato', // Subject line
             text: 'Conferma creazione utente', // plain text body
             html: '<b>Conferma creazione utente</b>' // html body
         });
-
-        return info;
     }
 
     /**
