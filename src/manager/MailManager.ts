@@ -51,8 +51,8 @@ export class MailManager {
             // create reusable transporter object using the default SMTP transport
             let transporter = nodemailer.createTransport({
                 host: process.env.SMTP_SERVER,
-                port: process.env.SMTP_PORT,
-                secure: process.env.SMTP_SECURE,
+                port: Number(process.env.SMTP_PORT),
+                secure: (process.env.SMTP_SECURE === "true"),
                 auth: {
                     user: process.env.SMTP_USER,
                     pass: process.env.SMTP_PASSWORD
