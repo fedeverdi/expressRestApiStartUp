@@ -16,6 +16,9 @@ export class User {
     age: number;
 
     @Column()
+    email: string;
+
+    @Column()
     username: string;
 
     @Column({ select: false })
