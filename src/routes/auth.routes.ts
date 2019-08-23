@@ -50,9 +50,9 @@ export class AuthRoute extends BaseRoute {
         app.post('/login', this.validate(
             [ check('username').exists(),
               check('password', 'Password è un campo obbligatorio di lunghezza minima di 5 caratteri').exists().isLength({ min: 5 }) ]),
-                (req: Request, res: Response, next: Function) => {      
+                async (req: Request, res: Response, next: Function) => {      
 
-            const result = new AuthController().login(req, res, next);
+            const result = await new AuthController().login(req, res, next);
             this.responseNext(result, res);
         });
 
@@ -62,9 +62,9 @@ export class AuthRoute extends BaseRoute {
               check('age', 'Il campo Age deve esistere ed essere numerico').exists().not().isString(),
               check('username').exists(),
               check('password', 'Password è un campo obbligatorio di lunghezza minima di 5 caratteri').exists().isLength({ min: 5 }) ]),
-                (req: Request, res: Response, next: Function) => {
+                async (req: Request, res: Response, next: Function) => {
             
-            const result = new AuthController().register(req, res, next);
+            const result = await new AuthController().register(req, res, next);
             this.responseNext(result, res);
         });
         /**
